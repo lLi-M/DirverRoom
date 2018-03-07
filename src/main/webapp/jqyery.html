@@ -1,0 +1,45 @@
+<!--Created by IntelliJ IDEA.-->
+<!--User: 李 雷-->
+<!--Date: 2017/12/31-->
+<!--Time: 12:08-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="static/js/jquery-1.8.3.js"></script>
+</head>
+<body>
+<form>
+    <h1 id="1">
+        李雷
+        <p id="3">李雷<small></small></p>
+        <p >lilei<b>你是谁</b></p>
+        <p >lll<small>woaini</small></p>
+        <p>你是是是</p>
+        <small>hahahah</small>
+        <img>
+        <img>
+        <img >
+    </h1>
+</form>
+<script type="text/javascript">
+    $(function () {
+
+        // $("#1").html("<h2>lileileilei</h2>");
+        $("form p:nth-child(2)").text("张晓丹");
+        // $("form h1 p small ").html("<font >李雷</font>")
+        $('form p[id=3]').text("lixiao");
+        $('form small:last-child').attr('id1','2');
+        // $("#2").text("woshi2");
+$("form p:last-child").remove();
+        $("form h1>p,small b").css("color","blue");
+        $("form img").append("<b>inter cloud draong</b>");
+        $("form img").before("<b>inter cloud draong</b>");
+        $('form img').after("<b>hahha</b>")
+    })
+
+
+</script>
+</body>
+</html>

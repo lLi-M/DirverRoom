@@ -1,0 +1,12 @@
+[
+		{ "id":"11", "pId":"0", "name":"基础预约信息"},
+		{ "id":"111", "pId":"11", "name":"预约教练信息",  "page":"ds/trainer"},
+	{ "id":"111", "pId":"11", "name":"发布公告信息",  "page":"ds/textarea"},
+		{ "id":"12", "pId":"0", "name":"用户预约信息"},
+	    { "id":"121", "pId":"13", "name":"用户全部信息","page":"ds/lookusertime"},
+	    { "id":"122", "pId":"12", "name":"备考人员名单", "page":"ds/testpeople"},
+	{ "id":"123", "pId":"12", "name":"查询练车名单","page":"ds/getappointment"},
+	{ "id":"13", "pId":"0", "name":"用户信息管理",},
+	{ "id":"131", "pId":"13", "name":"用户密码修改","page":"ds/changepassword"}
+
+]

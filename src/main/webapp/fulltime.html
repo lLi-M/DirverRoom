@@ -1,0 +1,148 @@
+<!--Created by IntelliJ IDEA.-->
+<!--User: 李 雷-->
+<!--Date: 2017/12/31-->
+<!--Time: 12:08-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练车详细时间表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="static/js/jquery-1.8.3.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+   <style type="text/css">
+       .header{width: 100%; height: 4rem; margin-top: 1rem;}
+       .time{width: 100%; height: 5rem; background-color: #F8F8F8; margin:0; }
+       .time ul li{width: 20%; height:5rem; float: left; text-align: center;color: black; padding: 10px 0 10px 0 !important;}
+       .time ul li.a1{color: white;  background-color: #337ab7 !important; }
+       .media img{width: 6rem; height: 6rem; float: left;border-radius: 50%;}
+       .dirver{margin-top: 0.5rem;}
+       .dirver ul li{margin: 0; padding: 1rem; width: 100%; height: 8rem; }
+       .dirver img{width: 6rem; height: 6rem; float: left;border-radius: 50%;border: 1px solid gray; }
+   </style>
+    </head>
+<body>
+<div class="container">
+<div class="row header">
+<div class="col-xs-3">
+    <a href="" class="btn btn-success btn-sm btn-block">
+        返回
+        <span class="glyphicon glyphicon-menu-left"></span>
+    </a>
+</div>
+    <div class="col-xs-7">
+        <h4 class="text-center">
+            科目二练车预约时间表
+        </h4>
+    </div>
+
+
+
+    <div class="dirver">
+        <ul class="list-group" id="dirverUL">
+
+        </ul>
+
+    </div>
+
+   <script type="text/javascript">
+       $(function () {
+
+           var list =$(${sessionScope.onlyTrainer.hList}) ;
+           var day=${sessionScope.onlyTrainer.testTime}
+           var name=${sessionScope.onlyTrainer.trainerName} ;
+           var carCode=${sessionScope.onlyTrainer.trainerCard} ;
+           for(var i=0;i<list.length;i++){
+               var fulltime;
+
+               switch (list[i]) {
+                   case "06":
+                       fulltime="6:00 ~ 7:00" ;
+                       break;
+                   case "07":
+                       fulltime="7:00 ~ 8:00" ;
+                       break;
+                   case "08":
+                       fulltime="8:00 ~ 9:00" ;
+                       break;
+                   case "09":
+                       fulltime="9:00 ~ 10:00" ;
+                       break;
+                   case "10":
+                       fulltime="10:00 ~ 11:00" ;
+                       break;
+                   case "14":
+                       fulltime="14:00 ~ 15:00" ;
+                       break;
+                   case "15":
+                       fulltime="15:00 ~ 16:00" ;
+                       break;
+                   case "16":
+                       fulltime="16:00 ~ 17:00" ;
+                       break;
+                   case "17":
+                       fulltime="17:00 ~ 18:00" ;
+                       break;
+                   case "18":
+                       fulltime="18:00 ~ 19:00" ;
+                       break;
+               }
+               var li='<li class="list-group-item"> <div class="row"><div class="col-xs-3"> <img src="img/driver.jpg" alt=""> </div><div class="col-xs-6"> <label>教练名：</label><span class="media-heading">'+name+'</span><br> <label>车牌号：</label><span class="media-heading">'+carCode+'</span><p></p><label>具体时间：</label><span class="hour">'+fulltime+'</span> </div> <div class="col-xs-3"> <button class="btn btn-success fat-btn" data-loading-text="预约">预约</button> </div> </div> </li>';
+               $('#dirverUL').append(li);
+           }
+
+           $("#dirverUL").click(function(ev){
+               // alert(ev.target.nodeName);
+               if (ev.target.nodeName=="BUTTON") {
+                   $(ev.target).button('loading').delay(1000).queue(function() {
+                       // $(this).addClass("btn-info");
+                       // $(this).text("已预约");
+                       // 编写进行ajax请求
+                       setPractice(day,getHour(ev.target),getDriverName(ev.target));
+                   });
+               };
+           })
+
+           function getDriverName(obj){
+               return $(obj).parent().prev().children('span').html();
+           }
+
+           function getHour(obj){
+               var hour1= $(obj).parent().prev().children('p').next().next().html();
+               var hour= hour1.substring(0,2);
+               return hour;
+           }
+
+           function setPractice(data0,hour,dirverName){
+               $.ajax({
+                   type: "POST",
+                   data:{"day":data0,"ap":hour,"subject":2,"trainerName":dirverName},
+                   url: "${pageContext.request.contextPath }/appointemnt/yuyue",
+                   statusCode : {
+                       200 : function(dataList){
+                           //  var dirverList = JSON.parse(dataList.paramData);
+                           var dirverList =dataList;
+                           alert(dirverList.message);
+                           window.location.href="${pageContext.request.contextPath }/show/trainerinfoone?day=data0&ap=ap&subject=2&trainerName=dirverName"
+                       },
+                       500 : function(dataList){
+                           alert("请先登录!");
+
+                           window.location.href="${pageContext.request.contextPath }/login";
+
+                       }
+                   }
+               })
+
+           }
+
+       })
+
+   </script>
+
+
+    </div>
+
+</div>
+</body>
+</html>
