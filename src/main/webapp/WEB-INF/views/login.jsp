@@ -11,7 +11,7 @@
     <title>管理员登录</title>
     <meta charset="UTF-8">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
+            src="${pageContext.request.contextPath}/static/js/jquery-1.8.3.js"></script>
     <link
             href="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css  "
             rel="stylesheet">
